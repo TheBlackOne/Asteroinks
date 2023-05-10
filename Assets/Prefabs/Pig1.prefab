@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9079293652028808448}
   - component: {fileID: 9079293652028808449}
   - component: {fileID: 6273773143756830317}
+  - component: {fileID: -4182828110623219254}
   m_Layer: 0
   m_Name: Pig1
   m_TagString: Untagged
@@ -163,3 +164,15 @@ MonoBehaviour:
   maxVelocity: 2
   maxAngularVelocity: 20
   poolIndex: 0
+--- !u!114 &-4182828110623219254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9079293652028808452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91f60ef05548cc46ae3ac1942ddc448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
