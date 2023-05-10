@@ -15,33 +15,32 @@ public class EuclidianTorus : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        var spriteWidth = spriteRenderer.sprite.rect.width;
-        var spriteHeight = spriteRenderer.sprite.rect.height;
+        var halfSpriteWidth = spriteRenderer.sprite.rect.width / 2;
+        var halfSpriteHeight = spriteRenderer.sprite.rect.height / 2;
         var spriteScreenPos = mainCamera.WorldToScreenPoint(transform.position);
 
         var screenWidth = Screen.width;
         var screenHeight = Screen.height;
 
-        // Teleport the game object
-        if (rigidBody.velocity.x > 0 && spriteScreenPos.x > screenWidth){
+        if (rigidBody.velocity.x > 0 && spriteScreenPos.x - halfSpriteWidth > screenWidth){
             Debug.Log("Right");
-            var newScreenPosition = new Vector3(0 - spriteWidth, spriteScreenPos.y, spriteScreenPos.z);
+            var newScreenPosition = new Vector3(0 - halfSpriteWidth, spriteScreenPos.y, spriteScreenPos.z);
             transform.position = mainCamera.ScreenToWorldPoint(newScreenPosition);
         }
         
-        else if (rigidBody.velocity.x < 0 && spriteScreenPos.x < 0 - spriteWidth){
+        else if (rigidBody.velocity.x < 0 && spriteScreenPos.x < 0 - halfSpriteWidth){
             Debug.Log("Left");
             var newScreenPosition = new Vector3(screenWidth, spriteScreenPos.y, spriteScreenPos.z);
             transform.position = mainCamera.ScreenToWorldPoint(newScreenPosition);
         }
  
-        else if (rigidBody.velocity.y > 0 && spriteScreenPos.y > screenHeight){
+        else if (rigidBody.velocity.y > 0 && spriteScreenPos.y - halfSpriteHeight > screenHeight){
             Debug.Log("Bottom");
-            var newScreenPosition = new Vector3(spriteScreenPos.x, 0 - spriteHeight, spriteScreenPos.z);
+            var newScreenPosition = new Vector3(spriteScreenPos.x, 0 - halfSpriteHeight, spriteScreenPos.z);
             transform.position = mainCamera.ScreenToWorldPoint(newScreenPosition);
         }
  
-        else if(rigidBody.velocity.y < 0 && spriteScreenPos.y < 0 - spriteHeight){
+        else if(rigidBody.velocity.y < 0 && spriteScreenPos.y < 0 - halfSpriteHeight){
             Debug.Log("Top");
             var newScreenPosition = new Vector3(spriteScreenPos.x, screenHeight, spriteScreenPos.z);
             transform.position = mainCamera.ScreenToWorldPoint(newScreenPosition);
