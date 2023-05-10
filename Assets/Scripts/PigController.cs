@@ -7,22 +7,25 @@ public class PigController : MonoBehaviour
     public float maxVelocity;
     public float maxAngularVelocity;
     public int poolIndex;
-    private Rigidbody2D rb;
+    private Rigidbody2D rigidBody;
 
     public void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    public void Reset()
+    public void Reset(Vector2 position)
     {
+        Debug.LogFormat("Setting position to {0}...", position);
+        transform.position = position;
+
         var newVelocity = new Vector2(Random.Range(-maxVelocity, maxVelocity), Random.Range(-maxVelocity, maxVelocity));
 
         Debug.LogFormat("Setting velocity to {0}", newVelocity);
-        rb.velocity = newVelocity;
+        rigidBody.velocity = newVelocity;
 
         float newAngularVelocity = Random.Range(-maxAngularVelocity, maxAngularVelocity);
         Debug.LogFormat("Setting angular velocity to {0}", newAngularVelocity);
-        rb.angularVelocity = newAngularVelocity;
+        rigidBody.angularVelocity = newAngularVelocity;
     }
 }

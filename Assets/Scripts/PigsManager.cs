@@ -9,6 +9,7 @@ public class PigsManager : MonoBehaviour
     public int numInitialPigs;
     public int numSpawnNewPigs;
     private List<ObjectPool<GameObject>> pigObjectPools;
+    private Camera mainCamera;
 
     private GameObject InstantiatePig(GameObject pigPrefab, int objectPoolIndex)
     {
@@ -45,22 +46,24 @@ public class PigsManager : MonoBehaviour
         }
     }
 
-    private void SpawnPigs(int poolIndex, int count)
+    private void SpawnPigs(int poolIndex, int count, Vector2 position)
     {
         for (int i = 0; i < count; i++)
         {
             var newPig = pigObjectPools[poolIndex].Get();
-            newPig.GetComponent<PigController>().Reset();
+            newPig.GetComponent<PigController>().Reset(position);
         }
     }
 
     private void Awake()
     {
+        mainCamera = Camera.main;
         CreateObjectPools();
     }
 
     void Start()
     {
-        SpawnPigs(0, numInitialPigs);
+        Vector2 position = mainCamera.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
+        SpawnPigs(0, numInitialPigs, position);
     }
 }
