@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class PigsController : MonoBehaviour
+public class PigsManager : MonoBehaviour
 {
     public List<GameObject> pigPrefabList;
     public int numInitialPigs;
@@ -15,7 +15,7 @@ public class PigsController : MonoBehaviour
         Debug.LogFormat("Instantiating Pig {0}...", objectPoolIndex);
 
         var newPig = Instantiate(pigPrefab);
-        newPig.GetComponent<Pig>().poolIndex = objectPoolIndex;
+        newPig.GetComponent<PigController>().poolIndex = objectPoolIndex;
 
         return newPig;
     }
@@ -50,7 +50,7 @@ public class PigsController : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             var newPig = pigObjectPools[poolIndex].Get();
-            newPig.GetComponent<Pig>().Reset();
+            newPig.GetComponent<PigController>().Reset();
         }
     }
 
@@ -61,6 +61,6 @@ public class PigsController : MonoBehaviour
 
     void Start()
     {
-        SpawnPigs(2, numInitialPigs);
+        SpawnPigs(0, numInitialPigs);
     }
 }

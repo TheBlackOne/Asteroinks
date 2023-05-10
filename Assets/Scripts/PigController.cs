@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pig : MonoBehaviour
+public class PigController : MonoBehaviour
 {
     public float maxVelocity;
     public float maxAngularVelocity;
