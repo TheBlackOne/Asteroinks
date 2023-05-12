@@ -25,6 +25,10 @@ public class PigsManager : MonoBehaviour
         {
             var pigPrefab = _pigPrefabList[i];
             int numPigs = _levelsNumSpawnPigsList[i];
+            if (i > 0)
+            {
+                numPigs *= _levelsNumSpawnPigsList[i - 1];
+            }
 
             _pigObjectPools.Add(
                 new ObjectPool<GameObject>(
