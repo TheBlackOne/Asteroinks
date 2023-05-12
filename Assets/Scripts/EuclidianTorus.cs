@@ -24,28 +24,24 @@ public class EuclidianTorus : MonoBehaviour {
 
         // Check right boundary
         if (rigidBody.velocity.x > 0 && spriteScreenPos.x - halfSpriteWidth > screenWidth){
-            Debug.Log("Right");
             var newScreenPosition = new Vector3(0 - halfSpriteWidth, spriteScreenPos.y, spriteScreenPos.z);
             transform.position = mainCamera.ScreenToWorldPoint(newScreenPosition);
         }
         
         // Check left boundary
         else if (rigidBody.velocity.x < 0 && spriteScreenPos.x < 0 - halfSpriteWidth){
-            Debug.Log("Left");
             var newScreenPosition = new Vector3(screenWidth, spriteScreenPos.y, spriteScreenPos.z);
             transform.position = mainCamera.ScreenToWorldPoint(newScreenPosition);
         }
  
         // Check top boundary
         else if (rigidBody.velocity.y > 0 && spriteScreenPos.y - halfSpriteHeight > screenHeight){
-            Debug.Log("Top");
             var newScreenPosition = new Vector3(spriteScreenPos.x, 0 - halfSpriteHeight, spriteScreenPos.z);
             transform.position = mainCamera.ScreenToWorldPoint(newScreenPosition);
         }
  
         // Check bottom boundary
         else if(rigidBody.velocity.y < 0 && spriteScreenPos.y < 0 - halfSpriteHeight){
-            Debug.Log("Bottom");
             var newScreenPosition = new Vector3(spriteScreenPos.x, screenHeight, spriteScreenPos.z);
             transform.position = mainCamera.ScreenToWorldPoint(newScreenPosition);
         }
