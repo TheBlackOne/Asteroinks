@@ -33,6 +33,7 @@ Here you can find a [Gameplay Video](https://github.com/TheBlackOne/Asteroinks/r
 - The game objects for bullets and asteroids are instantiated from their prefabs at runtime; the game object for the ship is set up in the scene.
 - There are object pools for bullets and asteroids, as they are spawned and despawned frequently. For such a simple project an object pool is not strictly necessary, but the Unity builtin [ObjectPool](https://docs.unity3d.com/ScriptReference/Pool.ObjectPool_1.html) class is very easy to work with and I consider object pools a good practice in Unity in general.
 - Results of expensive calls (like `GetComponent()`) are cached.
+- All values that are relevant for game design / balancing are exposed as properties of components on scene objects or prefabs, there are no hard coded / magic numbers.
 
 # Challenges
 - This is the first ever project I put together in Unity.
