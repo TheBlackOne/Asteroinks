@@ -7,29 +7,41 @@ public class PigController : MonoBehaviour
     public float maxVelocity;
     public float maxAngularVelocity;
     public int poolIndex;
+
     private Rigidbody2D rigidBody;
+    private PigsManager pigsManager;
+    private BirdsManager birdsManager;
 
     public void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        pigsManager = GameObject.Find("PigsManager").GetComponent<PigsManager>();
+        birdsManager = GameObject.Find("BirdsManager").GetComponent<BirdsManager>();
     }
 
-    public void Reset(Vector2 position)
+    public void Reset(Vector2 position, int _poolIndex)
     {
-        Debug.LogFormat("Setting position to {0}...", position);
         transform.position = position;
 
         float newRotationDegrees = Random.Range(0f, 360f);
-        Debug.LogFormat("Setting rotation to {0}", newRotationDegrees);
         transform.Rotate(0.0f, 0.0f, newRotationDegrees);
 
         var newVelocity = new Vector2(Random.Range(-maxVelocity, maxVelocity), Random.Range(-maxVelocity, maxVelocity));
 
-        Debug.LogFormat("Setting velocity to {0}", newVelocity);
         rigidBody.velocity = newVelocity;
 
         float newAngularVelocity = Random.Range(-maxAngularVelocity, maxAngularVelocity);
-        Debug.LogFormat("Setting angular velocity to {0}", newAngularVelocity);
         rigidBody.angularVelocity = newAngularVelocity;
+
+        poolIndex = _poolIndex;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bird")
+        {
+            pigsManager.PigHit(gameObject, poolIndex);
+            birdsManager.DespawnBird(collision.gameObject);
+        }
     }
 }

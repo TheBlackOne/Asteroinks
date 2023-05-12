@@ -6,34 +6,22 @@ using UnityEngine.Pool;
 public class PigsManager : MonoBehaviour
 {
     public List<GameObject> pigPrefabList;
-    public int numInitialPigs;
-    public int numSpawnNewPigs;
+    public List<int> levelsNumSpawnPigs;
     private List<ObjectPool<GameObject>> pigObjectPools;
     private Camera mainCamera;
-
-    private GameObject InstantiatePig(GameObject pigPrefab, int objectPoolIndex)
-    {
-        Debug.LogFormat("Instantiating Pig {0}...", objectPoolIndex);
-
-        var newPig = Instantiate(pigPrefab);
-        newPig.GetComponent<PigController>().poolIndex = objectPoolIndex;
-
-        return newPig;
-    }
 
     private void CreateObjectPools()
     {
         pigObjectPools = new List<ObjectPool<GameObject>>();
 
-        int numPigs = numInitialPigs;
-
         for (int i = 0; i < pigPrefabList.Count; i++)
         {
             var pigPrefab = pigPrefabList[i];
+            int numPigs = levelsNumSpawnPigs[i];
 
             pigObjectPools.Add(
                 new ObjectPool<GameObject>(
-                    createFunc: () => InstantiatePig(pigPrefab, i),
+                    createFunc: () => Instantiate(pigPrefab),
                     actionOnGet: (obj) => obj.SetActive(true), 
                     actionOnRelease: (obj) => obj.SetActive(false), 
                     actionOnDestroy: (obj) => Destroy(obj), 
@@ -41,8 +29,6 @@ public class PigsManager : MonoBehaviour
                     defaultCapacity: numPigs, 
                     maxSize: numPigs)
                 );
-
-            numPigs *= numPigs * numSpawnNewPigs;
         }
     }
 
@@ -51,8 +37,24 @@ public class PigsManager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             var newPig = pigObjectPools[poolIndex].Get();
-            newPig.GetComponent<PigController>().Reset(position);
+            newPig.GetComponent<PigController>().Reset(position, poolIndex);
         }
+    }
+
+    public void PigHit(GameObject pig, int poolIndex)
+    {
+        var position = pig.transform.position;
+        pigObjectPools[poolIndex].Release(pig);
+
+        int nextPoolIndex = poolIndex + 1;
+        if (nextPoolIndex >= pigObjectPools.Count)
+        {
+            nextPoolIndex = 0;
+        }
+
+        int numPigs = levelsNumSpawnPigs[nextPoolIndex];
+
+        SpawnPigs(nextPoolIndex, numPigs, pig.transform.position);
     }
 
     private void Awake()
@@ -64,6 +66,6 @@ public class PigsManager : MonoBehaviour
     void Start()
     {
         Vector2 position = mainCamera.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
-        SpawnPigs(0, numInitialPigs, position);
+        SpawnPigs(0, levelsNumSpawnPigs[0], position);
     }
 }
