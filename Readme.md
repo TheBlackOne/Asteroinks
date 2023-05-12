@@ -1,7 +1,7 @@
 # Instructions
 
 ## Gameplay Video
-Here you can find a [Gameplay Video](https://github.com/TheBlackOne/Asteroinks/raw/main/Video/Asteroinks%20Gameplay.mp4)
+Here you can find a [Gameplay Video](https://github.com/TheBlackOne/Asteroinks/releases/latest/download/Asteroinks.Gameplay.mp4)
 
 ## How to play
 
