@@ -1,5 +1,8 @@
 # Instructions
 
+## Gameplay Video
+Here you can find a [Gameplay Video](https://github.com/TheBlackOne/Asteroinks/raw/main/Video/Asteroinks%20Gameplay.mp4)
+
 ## How to play
 
 - Clone the repository, open in Unity, press play *or*
