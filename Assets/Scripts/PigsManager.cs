@@ -5,27 +5,28 @@ using UnityEngine.Pool;
 
 public class PigsManager : MonoBehaviour
 {
-    public List<GameObject> pigPrefabList;
-    public List<int> levelsNumSpawnPigs;
-    private List<ObjectPool<GameObject>> pigObjectPools;
-    private Camera mainCamera;
-    private int pigsAlive;
+    [SerializeField] private List<GameObject> _pigPrefabList;
+    [SerializeField] private List<int> _levelsNumSpawnPigsList;
+
+    private List<ObjectPool<GameObject>> _pigObjectPools;
+    private Camera _mainCamera;
+    private int _pigsAlive;
 
     private void CreateObjectPools()
     {
-        if (pigPrefabList.Count != levelsNumSpawnPigs.Count)
+        if (_pigPrefabList.Count != _levelsNumSpawnPigsList.Count)
         {
             Debug.LogError("Number of entries in Pig Prefab List and Levels Num Spawn Pigs must be equal!");
         }
 
-        pigObjectPools = new List<ObjectPool<GameObject>>();
+        _pigObjectPools = new List<ObjectPool<GameObject>>();
 
-        for (int i = 0; i < pigPrefabList.Count; i++)
+        for (int i = 0; i < _pigPrefabList.Count; i++)
         {
-            var pigPrefab = pigPrefabList[i];
-            int numPigs = levelsNumSpawnPigs[i];
+            var pigPrefab = _pigPrefabList[i];
+            int numPigs = _levelsNumSpawnPigsList[i];
 
-            pigObjectPools.Add(
+            _pigObjectPools.Add(
                 new ObjectPool<GameObject>(
                     createFunc: () => Instantiate(pigPrefab),
                     actionOnGet: (obj) => obj.SetActive(true), 
@@ -42,41 +43,41 @@ public class PigsManager : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            pigsAlive++;
-            var newPig = pigObjectPools[poolIndex].Get();
+            _pigsAlive++;
+            var newPig = _pigObjectPools[poolIndex].Get();
             newPig.GetComponent<PigController>().Reset(position, poolIndex);
         }
     }
 
     public void PigHit(GameObject pig, int poolIndex)
     {
-        pigsAlive--;
+        _pigsAlive--;
         var position = pig.transform.position;
-        pigObjectPools[poolIndex].Release(pig);
+        _pigObjectPools[poolIndex].Release(pig);
 
         int nextPoolIndex = poolIndex + 1;
-        if (poolIndex > 0 && pigsAlive == 0)
+        if (poolIndex > 0 && _pigsAlive == 0)
         {
             nextPoolIndex = 0;
         }
 
-        if (nextPoolIndex < pigObjectPools.Count)
+        if (nextPoolIndex < _pigObjectPools.Count)
         {
-            int pigsToSpawn = levelsNumSpawnPigs[nextPoolIndex];
+            int pigsToSpawn = _levelsNumSpawnPigsList[nextPoolIndex];
             SpawnPigs(nextPoolIndex, pigsToSpawn, pig.transform.position);
         }        
     }
 
     private void Awake()
     {
-        mainCamera = Camera.main;
-        pigsAlive = 0;
+        _mainCamera = Camera.main;
+        _pigsAlive = 0;
         CreateObjectPools();
     }
 
     void Start()
     {
-        Vector2 position = mainCamera.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
-        SpawnPigs(0, levelsNumSpawnPigs[0], position);
+        Vector2 position = _mainCamera.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
+        SpawnPigs(0, _levelsNumSpawnPigsList[0], position);
     }
 }

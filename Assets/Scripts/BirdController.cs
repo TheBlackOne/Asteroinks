@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BirdController : MonoBehaviour
 {
-    public float velocity;
-    public float maxAngularVelocity;
-    public float lifetime;
+    [SerializeField] private float _velocity;
+    [SerializeField] private float _maxAngularVelocity;
+    [SerializeField] private float _lifetime;
 
-    private Rigidbody2D rigidBody;
-    private BirdsManager birdsManager;
-    private float spawnTime;
+    private Rigidbody2D _rigidBody;
+    private BirdsManager _birdsManager;
+    private float _spawnTime;
 
     public void Reset(Vector2 position, Vector3 direction)
     {
@@ -19,20 +19,20 @@ public class BirdController : MonoBehaviour
         float newRotationDegrees = Random.Range(0f, 360f);
         transform.Rotate(0.0f, 0.0f, newRotationDegrees);
 
-        rigidBody.AddForce(direction * velocity, ForceMode2D.Impulse);
+        _rigidBody.AddForce(direction * _velocity, ForceMode2D.Impulse);
 
-        spawnTime = Time.time;
+        _spawnTime = Time.time;
     }
     public void Awake()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        birdsManager = GameObject.Find("BirdsManager").GetComponent<BirdsManager>();
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _birdsManager = GameObject.Find("BirdsManager").GetComponent<BirdsManager>();
     }
     public void Update()
     {
-        if (spawnTime + lifetime < Time.time)
+        if (_spawnTime + _lifetime < Time.time)
         {
-            birdsManager.DespawnBird(gameObject);
+            _birdsManager.DespawnBird(gameObject);
         }
     }
 }

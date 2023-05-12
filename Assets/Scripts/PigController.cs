@@ -4,52 +4,52 @@ using UnityEngine;
 
 public class PigController : MonoBehaviour
 {
-    public float maxVelocity;
-    public float maxAngularVelocity;
-    public int poolIndex;
-
-    private Rigidbody2D rigidBody;
-    private PigsManager pigsManager;
-    private BirdsManager birdsManager;
-    private ShipController shipController;
+    [SerializeField] private float _maxVelocity;
+    [SerializeField] private float _maxAngularVelocity;
+    
+    private int _poolIndex;
+    private Rigidbody2D _rigidBody;
+    private PigsManager _pigsManager;
+    private BirdsManager _birdsManager;
+    private ShipController _shipController;
 
     public void Awake()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        pigsManager = GameObject.Find("PigsManager").GetComponent<PigsManager>();
-        birdsManager = GameObject.Find("BirdsManager").GetComponent<BirdsManager>();
-        shipController = GameObject.Find("Ship").GetComponent<ShipController>();
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _pigsManager = GameObject.Find("PigsManager").GetComponent<PigsManager>();
+        _birdsManager = GameObject.Find("BirdsManager").GetComponent<BirdsManager>();
+        _shipController = GameObject.Find("Ship").GetComponent<ShipController>();
     }
 
-    public void Reset(Vector2 position, int _poolIndex)
+    public void Reset(Vector2 position, int poolIndex)
     {
         transform.position = position;
 
         float newRotationDegrees = Random.Range(0f, 360f);
         transform.Rotate(0.0f, 0.0f, newRotationDegrees);
 
-        var newVelocity = new Vector2(Random.Range(-maxVelocity, maxVelocity), Random.Range(-maxVelocity, maxVelocity));
+        var newVelocity = new Vector2(Random.Range(-_maxVelocity, _maxVelocity), Random.Range(-_maxVelocity, _maxVelocity));
 
-        rigidBody.velocity = newVelocity;
+        _rigidBody.velocity = newVelocity;
 
-        float newAngularVelocity = Random.Range(-maxAngularVelocity, maxAngularVelocity);
-        rigidBody.angularVelocity = newAngularVelocity;
+        float newAngularVelocity = Random.Range(-_maxAngularVelocity, _maxAngularVelocity);
+        _rigidBody.angularVelocity = newAngularVelocity;
 
-        poolIndex = _poolIndex;
+        _poolIndex = poolIndex;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Bird")
         {
-            pigsManager.PigHit(gameObject, poolIndex);
-            birdsManager.DespawnBird(collision.gameObject);
+            _pigsManager.PigHit(gameObject, _poolIndex);
+            _birdsManager.DespawnBird(collision.gameObject);
         }
 
         if (collision.gameObject.tag == "Ship")
         {
-            pigsManager.PigHit(gameObject, poolIndex);
-            shipController.ShipHit();
+            _pigsManager.PigHit(gameObject, _poolIndex);
+            _shipController.ShipHit();
         }
     }
 }
