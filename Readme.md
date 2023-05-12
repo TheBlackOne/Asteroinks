@@ -31,14 +31,14 @@
 - There are object pools for bullets and asteroids, as they are spawned and despawned frequently. For such a simple project an object pool is not strictly necessary, but the Unity builtin [ObjectPool](https://docs.unity3d.com/ScriptReference/Pool.ObjectPool_1.html) class is very easy to work with and I consider object pools a good practice in Unity in general.
 - Results of expensive calls (like `GetComponent()`) are cached.
 
-## Challenges
+# Challenges
 - This is the first ever project I put together in Unity.
 - Some concepts took a moment to wrap my head around, like local vs. world coordinates, units vs. pixels, and quaternions.
 - Navigating the references one can find about Unity problems needs to be done carefully. Some things work a bit different in 2D space, some solutions are outdated or - well ugly :-)
 - There was one occasion where game input would stop to work completely, restarting the Unity Editor fixed it.
 
-## Things *not* done/implemented
-(aka "if this were a more complex project, these would be good to do")
+# Things *not* done/implemented
+> if this were a more complex project, these would be good to do
 - A more proper way to handle dependencies instead of `GetComponent()` or `GameObject.Find()`.
 - Sprite Sheets / Sprite Atlases
 - Sprites in size of Power of Two
