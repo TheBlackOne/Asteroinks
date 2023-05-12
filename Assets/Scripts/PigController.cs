@@ -40,15 +40,15 @@ public class PigController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        pigsManager.PigHit(gameObject, poolIndex);
-
         if (collision.gameObject.tag == "Bird")
         {
+            pigsManager.PigHit(gameObject, poolIndex);
             birdsManager.DespawnBird(collision.gameObject);
         }
 
         if (collision.gameObject.tag == "Ship")
         {
+            pigsManager.PigHit(gameObject, poolIndex);
             shipController.ShipHit();
         }
     }
