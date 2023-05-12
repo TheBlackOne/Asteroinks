@@ -161,9 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80a961a4d68eb1b418a8aec9836c0db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVelocity: 2
-  maxAngularVelocity: 20
-  poolIndex: 0
+  _maxVelocity: 2
+  _maxAngularVelocity: 20
+  _poolIndex: 0
 --- !u!114 &-4182828110623219254
 MonoBehaviour:
   m_ObjectHideFlags: 0

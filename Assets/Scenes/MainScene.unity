@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2147951282387661411, guid: 5159abfdbf3cc7b479d71693a0a8cd90, type: 3}
+      propertyPath: _thrust
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2147951282387661411, guid: 5159abfdbf3cc7b479d71693a0a8cd90, type: 3}
+      propertyPath: _turnRate
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9079293652028808452, guid: 5159abfdbf3cc7b479d71693a0a8cd90, type: 3}
       propertyPath: m_Name
       value: Ship
@@ -301,9 +309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74d785a9e7095d4395c8ccd022715aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdPrefab: {fileID: 9079293652028808452, guid: b8f2dc2b4edd6b84daf60aec49261cfa, type: 3}
-  maxNumBirds: 10
-  timeBetweenSpawns: 0.1
+  _birdPrefab: {fileID: 9079293652028808452, guid: b8f2dc2b4edd6b84daf60aec49261cfa, type: 3}
+  _maxNumBirds: 10
+  _timeBetweenSpawns: 0.1
 --- !u!4 &940107952
 Transform:
   m_ObjectHideFlags: 0
@@ -363,8 +371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ae033c50e8a644c909ddde7bc54805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pigPrefabList:
+  _pigPrefabList:
   - {fileID: 9079293652028808452, guid: 00b751c70b9a3c04eab97b19c85da209, type: 3}
   - {fileID: 9079293652028808452, guid: 0a8e230bbdda40a4399e4d902f790cb6, type: 3}
   - {fileID: 9079293652028808452, guid: d9ce078ab3a497a4596a971bbafbaf21, type: 3}
-  levelsNumSpawnPigsList: 010000000300000003000000
+  _levelsNumSpawnPigsList: 010000000300000003000000
