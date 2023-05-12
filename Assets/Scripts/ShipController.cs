@@ -6,10 +6,14 @@ public class ShipController : MonoBehaviour
     public float maxThrust;
     public float turnRate;
     private Rigidbody2D rigidBody;
+    private BirdsManager birdsManager;
+    private GameObject birdOrigin;
 
     public void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        birdsManager = GameObject.Find("BirdsManager").GetComponent<BirdsManager>();
+        birdOrigin = GameObject.Find("BirdOrigin");
     }
 
     void FixedUpdate()
@@ -29,6 +33,11 @@ public class ShipController : MonoBehaviour
         {
             Vector3 rotationToAdd = new Vector3(0, 0, -turnRate);
             transform.Rotate(rotationToAdd);
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            birdsManager.SpawnBird(birdOrigin.transform.position, transform.up);
         }
     }
 }
