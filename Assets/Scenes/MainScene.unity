@@ -367,6 +367,4 @@ MonoBehaviour:
   - {fileID: 9079293652028808452, guid: 00b751c70b9a3c04eab97b19c85da209, type: 3}
   - {fileID: 9079293652028808452, guid: 0a8e230bbdda40a4399e4d902f790cb6, type: 3}
   - {fileID: 9079293652028808452, guid: d9ce078ab3a497a4596a971bbafbaf21, type: 3}
-  levelsNumSpawnPigs: 010000000300000003000000
-  numInitialPigs: 1
-  numSpawnNewPigs: 3
+  levelsNumSpawnPigsList: 010000000300000003000000
