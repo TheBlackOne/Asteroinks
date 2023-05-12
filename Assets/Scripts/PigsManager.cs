@@ -13,7 +13,7 @@ public class PigsManager : MonoBehaviour
 
     private void CreateObjectPools()
     {
-        if (pigPrefabList.Count == levelsNumSpawnPigs.Count)
+        if (pigPrefabList.Count != levelsNumSpawnPigs.Count)
         {
             Debug.LogError("Number of entries in Pig Prefab List and Levels Num Spawn Pigs must be equal!");
         }
