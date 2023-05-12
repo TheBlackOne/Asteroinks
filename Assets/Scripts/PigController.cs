@@ -11,12 +11,14 @@ public class PigController : MonoBehaviour
     private Rigidbody2D rigidBody;
     private PigsManager pigsManager;
     private BirdsManager birdsManager;
+    private ShipController shipController;
 
     public void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         pigsManager = GameObject.Find("PigsManager").GetComponent<PigsManager>();
         birdsManager = GameObject.Find("BirdsManager").GetComponent<BirdsManager>();
+        shipController = GameObject.Find("Ship").GetComponent<ShipController>();
     }
 
     public void Reset(Vector2 position, int _poolIndex)
@@ -38,10 +40,16 @@ public class PigController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        pigsManager.PigHit(gameObject, poolIndex);
+
         if (collision.gameObject.tag == "Bird")
         {
-            pigsManager.PigHit(gameObject, poolIndex);
             birdsManager.DespawnBird(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Ship")
+        {
+            shipController.ShipHit();
         }
     }
 }
