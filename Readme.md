@@ -6,7 +6,7 @@ Here you can find a [Gameplay Video](https://github.com/TheBlackOne/Asteroinks/r
 ## How to play
 
 - Clone the repository, open in Unity, press play *or*
-- Download the [Windows 64 binary](https://github.com/TheBlackOne/Asteroinks/releases/latest/download/Win64.zip) from releases and start the binary.
+- Download the [Windows 64 build](https://github.com/TheBlackOne/Asteroinks/releases/latest/download/Win64.zip) from releases, open the ZIP archive and start the binary inside.
 
 ## Controls
 - A: Turn left
