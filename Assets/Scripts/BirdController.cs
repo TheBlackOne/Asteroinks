@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class BirdController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float velocity;
+    public float maxAngularVelocity;
+    private Rigidbody2D rigidBody;
+
+    public void Awake()
     {
-        
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Reset(Vector2 position, Vector3 direction)
     {
-        
+        Debug.LogFormat("Setting position to {0}...", position);
+        transform.position = position;
+
+
+        float newRotationDegrees = Random.Range(0f, 360f);
+        Debug.LogFormat("Setting rotation to {0}", newRotationDegrees);
+        transform.Rotate(0.0f, 0.0f, newRotationDegrees);
+
+        rigidBody.AddForce(direction * velocity, ForceMode2D.Impulse);
     }
 }
