@@ -5,7 +5,7 @@ Here you can find a [Gameplay Video](https://github.com/TheBlackOne/Asteroinks/r
 
 ## How to play
 
-- Clone the repository, open in Unity, press play *or*
+- Clone the repository, open in Unity Editor, press play *or*
 - Download the [Windows 64 build](https://github.com/TheBlackOne/Asteroinks/releases/latest/download/Win64.zip) from releases, open the ZIP archive and start the binary inside.
 
 ## Controls
@@ -26,6 +26,7 @@ Here you can find a [Gameplay Video](https://github.com/TheBlackOne/Asteroinks/r
 
 # Code Design
 ## Overview
+- Unity version used: 2021.3.24f1 LTS
 - Overall, I tried to work in a Unity-like fashion: Figure out which constructs and methods are best suited for what I wanted to do, instead of reinventin the wheel.
 - The project makes heavy use of builtin Unity features such as Rigidbody 2D and Polygon Collider 2D to simulate movement and collision. That cuts down the need of boilerplate code for such functions to a minimum.
 - There is only one scene, that eliminates the need for dealing e.g. with manager classes that get reloaded and need constructs like Singleton, Service Locator or the like.
