@@ -6,12 +6,11 @@ public class BirdController : MonoBehaviour
 {
     public float velocity;
     public float maxAngularVelocity;
-    private Rigidbody2D rigidBody;
+    public float lifetime;
 
-    public void Awake()
-    {
-        rigidBody = GetComponent<Rigidbody2D>();
-    }
+    private Rigidbody2D rigidBody;
+    private BirdsManager birdsManager;
+    private float spawnTime;
 
     public void Reset(Vector2 position, Vector3 direction)
     {
@@ -24,5 +23,19 @@ public class BirdController : MonoBehaviour
         transform.Rotate(0.0f, 0.0f, newRotationDegrees);
 
         rigidBody.AddForce(direction * velocity, ForceMode2D.Impulse);
+
+        spawnTime = Time.time;
+    }
+    public void Awake()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+        birdsManager = GameObject.Find("BirdsManager").GetComponent<BirdsManager>();
+    }
+    public void Update()
+    {
+        if (spawnTime + lifetime < Time.time)
+        {
+            birdsManager.DespawnBird(gameObject);
+        }
     }
 }

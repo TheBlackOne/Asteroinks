@@ -166,3 +166,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 5
   maxAngularVelocity: 7
+  lifetime: 1.5

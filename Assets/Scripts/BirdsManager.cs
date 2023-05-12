@@ -7,8 +7,9 @@ public class BirdsManager : MonoBehaviour
 {
     public GameObject birdPrefab;
     public int maxNumBirds;
-    private ObjectPool<GameObject> birdObjectPool;
 
+    private ObjectPool<GameObject> birdObjectPool;
+    private int numBirds;
 
     private void CreateObjectPool()
     {
@@ -24,13 +25,23 @@ public class BirdsManager : MonoBehaviour
 
     public void SpawnBird(Vector2 position, Vector3 direction)
     {
-        var newBird = birdObjectPool.Get();
-        newBird.GetComponent<BirdController>().Reset(position, direction);
+        if (numBirds < maxNumBirds)
+        {
+            numBirds++;
+            var newBird = birdObjectPool.Get();
+            newBird.GetComponent<BirdController>().Reset(position, direction);
+        }
+    }
 
+    public void DespawnBird(GameObject bird)
+    {
+        numBirds--;
+        birdObjectPool.Release(bird);
     }
 
     public void Awake()
     {
+        numBirds = 0;
         CreateObjectPool();
     }
 }
