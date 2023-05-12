@@ -11,7 +11,7 @@ Here you can find a [Gameplay Video](https://github.com/TheBlackOne/Asteroinks/r
 ## Controls
 - A: Turn left
 - D: Turn right
-- W: Fire thruster
+- W: Give thrust
 - Space: Fire bullet
 
 ## Game Design
