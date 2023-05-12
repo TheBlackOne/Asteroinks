@@ -303,6 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   birdPrefab: {fileID: 9079293652028808452, guid: b8f2dc2b4edd6b84daf60aec49261cfa, type: 3}
   maxNumBirds: 10
+  timeBetweenSpawns: 0.1
 --- !u!4 &940107952
 Transform:
   m_ObjectHideFlags: 0
