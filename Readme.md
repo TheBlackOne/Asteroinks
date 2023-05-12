@@ -11,7 +11,7 @@ Here you can find a [Gameplay Video](https://github.com/TheBlackOne/Asteroinks/r
 ## Controls
 - A: Turn left
 - D: Turn right
-- W: Give thrust
+- W: Give forward thrust
 - Space: Fire bullet
 
 ## Game Design
@@ -27,10 +27,10 @@ Here you can find a [Gameplay Video](https://github.com/TheBlackOne/Asteroinks/r
 # Code Design
 ## Overview
 - Unity version used: 2021.3.24f1 LTS
-- Overall, I tried to work in a Unity-like fashion: Figure out which constructs and methods are best suited for what I wanted to do, instead of reinventin the wheel.
+- Overall, I tried to work in a Unity-like fashion: Figure out which constructs and methods are best suited for what I wanted to do, instead of reinventing the wheel.
 - The project makes heavy use of builtin Unity features such as Rigidbody 2D and Polygon Collider 2D to simulate movement and collision. That cuts down the need of boilerplate code for such functions to a minimum.
 - There is only one scene, that eliminates the need for dealing e.g. with manager classes that get reloaded and need constructs like Singleton, Service Locator or the like.
-- Manager classes for the overall logic for bullets (aka. birds) and asteroids (aka pigs), controller classes for instance-specific logic attached to the respective prefab.
+- Manager classes for the overall logic for bullets (aka birds) and asteroids (aka pigs), controller classes for instance-specific logic are attached to the respective prefab.
 - The game objects for bullets and asteroids are instantiated from their prefabs at runtime; the game object for the ship is set up in the scene.
 - There are object pools for bullets and asteroids, as they are spawned and despawned frequently. For such a simple project an object pool is not strictly necessary, but the Unity builtin [ObjectPool](https://docs.unity3d.com/ScriptReference/Pool.ObjectPool_1.html) class is very easy to work with and I consider object pools a good practice in Unity in general.
 - Results of expensive calls (like `GetComponent()`) are cached.
