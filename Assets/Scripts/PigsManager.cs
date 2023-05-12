@@ -9,9 +9,15 @@ public class PigsManager : MonoBehaviour
     public List<int> levelsNumSpawnPigs;
     private List<ObjectPool<GameObject>> pigObjectPools;
     private Camera mainCamera;
+    private int pigsAlive;
 
     private void CreateObjectPools()
     {
+        if (pigPrefabList.Count == levelsNumSpawnPigs.Count)
+        {
+            Debug.LogError("Number of entries in Pig Prefab List and Levels Num Spawn Pigs must be equal!");
+        }
+
         pigObjectPools = new List<ObjectPool<GameObject>>();
 
         for (int i = 0; i < pigPrefabList.Count; i++)
@@ -36,6 +42,7 @@ public class PigsManager : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
+            pigsAlive++;
             var newPig = pigObjectPools[poolIndex].Get();
             newPig.GetComponent<PigController>().Reset(position, poolIndex);
         }
@@ -43,23 +50,27 @@ public class PigsManager : MonoBehaviour
 
     public void PigHit(GameObject pig, int poolIndex)
     {
+        pigsAlive--;
         var position = pig.transform.position;
         pigObjectPools[poolIndex].Release(pig);
 
         int nextPoolIndex = poolIndex + 1;
-        if (nextPoolIndex >= pigObjectPools.Count)
+        if (poolIndex > 0 && pigsAlive == 0)
         {
             nextPoolIndex = 0;
         }
 
-        int numPigs = levelsNumSpawnPigs[nextPoolIndex];
-
-        SpawnPigs(nextPoolIndex, numPigs, pig.transform.position);
+        if (nextPoolIndex < pigObjectPools.Count)
+        {
+            int pigsToSpawn = levelsNumSpawnPigs[nextPoolIndex];
+            SpawnPigs(nextPoolIndex, pigsToSpawn, pig.transform.position);
+        }        
     }
 
     private void Awake()
     {
         mainCamera = Camera.main;
+        pigsAlive = 0;
         CreateObjectPools();
     }
 
